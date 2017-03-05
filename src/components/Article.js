@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import CommentsList from './CommentsList'
+
 class Article extends Component {
 
     constructor() {
@@ -13,10 +15,12 @@ class Article extends Component {
         const {article} = this.props
         const {isOpen} = this.state
         const body = isOpen ? <section>{article.text}</section> : null
+        const comments = isOpen ? <CommentsList comments={article.comments} /> : null
         return (
             <div>
                 <h3 onClick={this.handleClick}>{article.title}</h3>
                 {body}
+                {comments}
             </div>
         )
     }
@@ -26,6 +30,8 @@ class Article extends Component {
             isOpen: !this.state.isOpen
         })
     }
+
+
 }
 
 export default Article
