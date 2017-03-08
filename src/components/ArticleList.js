@@ -1,14 +1,28 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Article from './Article'
+import toggleAccordion from '../decorators/toggleAccordion'
 
-export default (props) => {
-    const {articles} = props
+function ArticleList(props) {
 
-    const articleComponents = articles.map(article => <li key={article.id}><Article article={article}/></li>)
+    const {articles, openItemId, toggleAccordion} = props
+
+    const articleComponents = articles.map(article => <li key={article.id}>
+        <Article article={article}
+                 isOpen={article.id === openItemId}
+                 toggleOpen={toggleAccordion(article.id)}
+        />
+    </li>)
 
     return (
         <ul>
             {articleComponents}
         </ul>
     )
+
 }
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default toggleAccordion(ArticleList)
