@@ -22,6 +22,7 @@ function ArticleList(props) {
 }
 
 ArticleList.propTypes = {
+        //вот сюда еще и из декоратора данные приходят
     articles: PropTypes.array.isRequired
 }
 
