@@ -12,6 +12,11 @@ class CommentList extends Component {
         comments: []
     }
 
+    state = {
+        name: '',
+        message: ''
+    }
+
     componentDidUpdate() {
         this.size = this.container.getBoundingClientRect()
     }
@@ -23,6 +28,7 @@ class CommentList extends Component {
             <div ref={this.getContainerRef}>
                 <a href="#" onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</a>
                 {this.getBody()}
+                {this.getCommentForm()}
             </div>
         )
     }
@@ -55,6 +61,39 @@ class CommentList extends Component {
             </div>
         )
     }
+
+    getCommentForm() {
+        const {isOpen} = this.props
+        if (!isOpen) return null
+
+        return (
+            <form>
+                Enter your name:
+                <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
+                Enter your message:
+                <textarea value={this.state.message} onChange={this.handleMessageChange} />
+                <input type="submit" value="Submit" />
+            </form>
+        )
+    }
+
+    handleNameChange = ev => {
+        if (ev.target.value.length > 10) return
+
+        this.setState({
+            name: ev.target.value
+        })
+    }
+
+    handleMessageChange = ev => {
+        if (ev.target.value.length > 150) return
+
+        this.setState({
+            message: ev.target.value
+        })
+    }
+
+
 }
 
 export default toggleOpen(CommentList)
