@@ -62,6 +62,7 @@ class CommentList extends Component {
         )
     }
 
+    //форму стоит вынести в отдельный компонент
     getCommentForm() {
         const {isOpen} = this.props
         if (!isOpen) return null
