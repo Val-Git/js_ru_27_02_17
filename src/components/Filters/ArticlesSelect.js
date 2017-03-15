@@ -13,6 +13,7 @@ class SelectFilter extends Component {
 
     handleChange = selected => {
         const { selectArticle, filterArticles } = this.props
+        //не нужно на 2 AC разбивать
         selectArticle(selected)
         filterArticles({selected: selected})
     }
