@@ -1,5 +1,6 @@
 import {articles} from '../fixtures'
-import {DELETE_ARTICLE} from '../constants'
+import { DateUtils } from 'react-day-picker'
+import {DELETE_ARTICLE, FILTER_ARTICLES} from '../constants'
 
 export default (state = articles, action) => {
     const { type, payload } = action
@@ -7,6 +8,11 @@ export default (state = articles, action) => {
     switch (type) {
         case DELETE_ARTICLE:
             return state.filter(article => article.id !== payload.id)
+
+        case FILTER_ARTICLES:  // пока только select
+            return articles.filter(article => ~payload.filters.selected.findIndex(elem => elem.value == article.id) )
+            // return articles.filter(article => DateUtils.isDayInRange(article.date, payload.filters))
+
 
     }
 
