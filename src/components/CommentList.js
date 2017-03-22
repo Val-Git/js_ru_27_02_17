@@ -10,7 +10,8 @@ class CommentList extends Component {
     }
 
     static defaultProps = {
-        comments: []
+        comments: [],
+        article_id: null
     }
 
     componentDidUpdate() {
@@ -36,7 +37,7 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {comments, isOpen} = this.props
+        const {comments, isOpen, article_id} = this.props
         if (!isOpen) return null
 
         if (!comments.length) {
@@ -44,17 +45,17 @@ class CommentList extends Component {
                 <h3>
                     No comments yet
                 </h3>
-                <NewCommentForm />
+                <NewCommentForm article_id={article_id} />
             </div>
         }
 
-        const commentItems = comments.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)
+        const commentItems = comments.map(id => <li key={id}><Comment id={id} /></li>)
         return (
             <div>
                 <ul>
                     {commentItems}
                 </ul>
-                <NewCommentForm />
+                <NewCommentForm article_id={article_id} />
             </div>
         )
     }
