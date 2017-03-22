@@ -13,6 +13,7 @@ export default (state = normalizedArticles, action) => {
             if (comment_id) {
                 return state.map(article => {
                     if (article.id == payload.article_id) {
+                        //здесь ты мутируешь стейт. Возвращаешь новый массив, но внутри меняешь объекты по ссылке
                         article.comments.push(comment_id)
                     }
                     return article
